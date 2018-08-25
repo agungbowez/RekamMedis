@@ -1,3 +1,8 @@
+<?php
+    
+  require_once "../_config/config.php"; 
+ ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +14,8 @@
     <meta name="author" content="">
     <title>Login Aplikasi Rekam Medis</title>
     <!-- Bootstrap Core CSS -->
-    <link href="../_assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?=base_url('_assets/css/bootstrap.min.css');?>" rel="stylesheet">
+    <link rel="icon" href="<?=base_url('_assets/yikcoding.png')?>">
 
 </head>
 <body>
@@ -23,7 +29,7 @@
                     </div>
 
                      <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                         <input type="password" name="pass" class="form-control" placeholder="password" required>
                     </div>
 
