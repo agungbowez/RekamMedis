@@ -1,5 +1,4 @@
 <?php
-    
   require_once "../_config/config.php"; 
  ?>
 
@@ -21,7 +20,31 @@
 <body>
     <div id="wrapper">
         <div class="container">
-            <div align="center" style="margin-top : 200px">
+            <div align="center" style="margin-top : 210px">
+                <?php
+                  if(isset($_POST['login'])){
+                    $user = trim(mysqli_real_escape_string($con, $_POST['user']));
+                    $pass = sha1(trim(mysqli_real_escape_string($con, $_POST['pass'])));
+
+                    $sql_login = mysqli_query($con, "select * from tb_user where username = '$user' and password = '$pass'") or die (mysqli_error($con));
+                    // echo mysqli_num_rows($sqli_login);  // cara debug
+                    if( mysqli_num_rows($sql_login) > 0 ){
+                        $_SESSION['user'] = $user;
+                        echo "<script> window.location='".base_url()."'; </script>";
+                    }else{ ?>
+                        <div class="row">
+                            <div class="col-lg-6 col-lg-offset-3">
+                                <div class="alert alert-danger alert-dismissable" role="alert">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    <span class="glyphicon glyphicon-echlamation-sign" aria-hidden="true"></span>
+                                    <strong> Login gagal </strong> Username / password salah
+                                </div>
+                            </div>
+                        </div>
+                        <?php
+                    }
+                  } 
+                 ?>
                 <form action="" method="post" class="navbar-form">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user" ></i></span>
@@ -41,7 +64,7 @@
             </div>
         </div>   
     </div>
-   
+   <script src="<?=base_url('_assets/js/jquery.js')?>"></script>
+   <script src="<?=base_url('_assets/js/bootstrap.min.js')?>"></script>
 </body>
-
 </html>
